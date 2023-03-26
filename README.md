@@ -13,4 +13,4 @@
 5. JavaScript.
 6. React
 
-Все запросы на авторизацию, регистрацию и проверку токена должны работать через сервис https://auth.nomoreparties.co
+[Для просмотра работы, нажмите](https://VitOtmb.github.io/react-mesto-auth)
