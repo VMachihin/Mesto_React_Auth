@@ -2,7 +2,6 @@ import ok from '../images/info/Ok.png';
 import err from '../images/info/Error.png';
 
 function InfoTooltip({ tooltip, error, onClose, closeAllPopups }) {
-  console.log(error);
   return (
     <div className={`popup popup__infoTooltip ${tooltip && onClose ? 'popup_opened' : ''}`}>
       <div className="popup__container popup__infoTooltip">

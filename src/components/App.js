@@ -174,8 +174,18 @@ function App() {
       });
   }
 
-  function handleLogin() {
-    setLoggedIn(true);
+  function handleAuthoriz(email, password) {
+    auth
+      .authorization(email, password)
+      .then((data) => {
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          setLoggedIn(true);
+          setUserEmail(email);
+          navigate('/', { replace: true });
+        }
+      })
+      .catch((err) => console.log(err));
   }
 
   function handleSignOut() {
@@ -183,7 +193,6 @@ function App() {
     setUserEmail('');
   }
 
-  console.log(error);
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -216,10 +225,7 @@ function App() {
               />
             }
           />
-          <Route
-            path="/sign-in"
-            element={<Login onLogin={handleLogin} setUserEmail={setUserEmail} />}
-          />
+          <Route path="/sign-in" element={<Login onAuthoriz={handleAuthoriz} />} />
         </Routes>
 
         {loggedIn && <Footer />}

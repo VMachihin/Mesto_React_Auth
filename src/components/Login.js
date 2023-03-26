@@ -1,12 +1,7 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import * as auth from '../utils/Auth';
-
 import UseForm from '../hooks/UseForm';
 
-function Login({ onLogin, setUserEmail }) {
-  const navigate = useNavigate();
-
+function Login({ onAuthoriz }) {
   const { values, handleChange, setValues } = UseForm({});
 
   function handleSubmit(e) {
@@ -15,17 +10,8 @@ function Login({ onLogin, setUserEmail }) {
     if (!values.email || !values.password) {
       return;
     }
-    auth
-      .authorization(values.email, values.password)
-      .then((data) => {
-        if (data.token) {
-          setValues({ email: '', password: '' });
-          onLogin();
-          setUserEmail(values.email);
-          navigate('/', { replace: true });
-        }
-      })
-      .catch((err) => console.log(err));
+    setValues({ email: '', password: '' });
+    onAuthoriz(values.email, values.password);
   }
 
   return (
