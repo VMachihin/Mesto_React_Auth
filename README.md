@@ -13,4 +13,4 @@
 5. JavaScript.
 6. React
 
-[Для просмотра работы, нажмите]("https://VitOtmb.github.io/react-mesto-auth")
+[Для просмотра работы, нажмите](https://VitOtmb.github.io/react-mesto-auth)
