@@ -1,3 +1,5 @@
+import Popup from './Popup';
+
 function PopupWithForm({
   title,
   buttonText,
@@ -7,20 +9,22 @@ function PopupWithForm({
   closeAllPopups,
   onClose,
   onSubmit,
+  isValid,
 }) {
   return (
-    <div className={`popup popup_${name} ${isOpen && onClose ? 'popup_opened' : ''}`}>
-      <div className={`popup__container popup__container_${name}`}>
-        <h2 className="popup__title">{title}</h2>
-        <form className="popup__form" name={`popup-${name}`} onSubmit={onSubmit}>
-          {children}
-          <button className="popup__btn popup__btn_save" type="submit">
-            {buttonText}
-          </button>
-        </form>
-        <button type="button" className="popup__close" onClick={closeAllPopups} />
-      </div>
-    </div>
+    <Popup isOpen={isOpen} onClose={onClose} closeAllPopups={closeAllPopups} name={name}>
+      <h2 className="popup__title">{title}</h2>
+      <form className="popup__form" name={`popup-${name}`} onSubmit={onSubmit} noValidate>
+        {children}
+        <button
+          disabled={!isValid}
+          className={`popup__btn popup__btn_save ${!isValid && 'popup__btn_disabled'}`}
+          type="submit"
+        >
+          {buttonText}
+        </button>
+      </form>
+    </Popup>
   );
 }
 
