@@ -146,13 +146,16 @@ function App() {
     if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
       if (token) {
-        auth.checkToken(token).then((res) => {
-          if (res) {
-            setLoggedIn(true);
-            setUserEmail(res.data.email);
-            navigate('/', { replace: true });
-          }
-        });
+        auth
+          .checkToken(token)
+          .then((res) => {
+            if (res) {
+              setLoggedIn(true);
+              setUserEmail(res.data.email);
+              navigate('/', { replace: true });
+            }
+          })
+          .catch((err) => console.error(err));
       }
     }
   }

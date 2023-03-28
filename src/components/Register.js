@@ -1,10 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import UseForm from '../hooks/UseForm';
+import useFormAndValidation from '../hooks/useFormAndValidation';
+import AuthForm from './AuthForm';
 
 function Register({ onRegister }) {
-  const { values, handleChange } = UseForm({});
+  const { values, handleChange, errors, isValid, setIsValid } = useFormAndValidation({});
+
+  React.useEffect(() => {
+    setIsValid(false);
+  }, [setIsValid]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -17,44 +21,22 @@ function Register({ onRegister }) {
 
   return (
     <section className="sign">
-      <form className="sign__form" onSubmit={handleSubmit}>
-        <h2 className="sign__title">Регистрация</h2>
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="sign__input"
-          placeholder="Email"
-          required
-          minLength="2"
-          maxLength="40"
-          value={values.email || ''}
-          onChange={handleChange}
-        />
-        <span className="popup__text-error email-error"></span>
-        <input
-          type="password"
-          name="password"
-          id="password"
-          className="sign__input"
-          placeholder="Пароль"
-          required
-          value={values.password || ''}
-          onChange={handleChange}
-        />
-        <span className="popup__text-error password-error"></span>
+      <AuthForm
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        values={values}
+        title={'Регистрация'}
+        buttonText={'Зарегистрироваться'}
+        errors={errors}
+        isValid={isValid}
+      />
 
-        <button type="submit" className="sign__btn">
-          Зарегистрироваться
-        </button>
-
-        <span className="sign__text">
-          Уже зарегистрированы?&nbsp;
-          <Link to="/sign-in" className="sign__linkSignIn">
-            Войти
-          </Link>
-        </span>
-      </form>
+      <span className="sign__text">
+        Уже зарегистрированы?&nbsp;
+        <Link to="/sign-in" className="sign__linkSignIn">
+          Войти
+        </Link>
+      </span>
     </section>
   );
 }

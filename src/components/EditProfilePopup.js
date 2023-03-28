@@ -2,16 +2,18 @@ import React from 'react';
 import PopupWithForm from './PopupWithForm';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 
-import UseForm from '../hooks/UseForm';
+import useFormAndValidation from '../hooks/useFormAndValidation';
 
 function EditProfilePopup({ isOpen, onClose, closeAllPopups, onUpdateUser, isLoading }) {
   const currentUser = React.useContext(CurrentUserContext);
 
-  const { values, handleChange, setValues } = UseForm(currentUser);
+  const { values, handleChange, setValues, errors, isValid, setIsValid } =
+    useFormAndValidation(currentUser);
 
   React.useEffect(() => {
     setValues(currentUser);
-  }, [currentUser, isOpen, setValues]);
+    setIsValid(true);
+  }, [currentUser, isOpen, setValues, setIsValid]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -27,6 +29,7 @@ function EditProfilePopup({ isOpen, onClose, closeAllPopups, onUpdateUser, isLoa
       closeAllPopups={closeAllPopups}
       onClose={onClose}
       onSubmit={handleSubmit}
+      isValid={isValid}
     >
       <input
         type="text"
@@ -40,7 +43,9 @@ function EditProfilePopup({ isOpen, onClose, closeAllPopups, onUpdateUser, isLoa
         maxLength="40"
         onChange={handleChange}
       />
-      <span className="popup__text-error name-error" />
+      <span className={`popup__text-error place-error ${!isValid && 'popup__text-error_active'}`}>
+        {errors.name}
+      </span>
       <input
         type="text"
         name="about"
@@ -53,7 +58,9 @@ function EditProfilePopup({ isOpen, onClose, closeAllPopups, onUpdateUser, isLoa
         maxLength="200"
         onChange={handleChange}
       />
-      <span className="popup__text-error aboutMe-error" />
+      <span className={`popup__text-error place-error ${!isValid && 'popup__text-error_active'}`}>
+        {errors.about}
+      </span>
     </PopupWithForm>
   );
 }
