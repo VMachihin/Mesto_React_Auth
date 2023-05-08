@@ -120,7 +120,7 @@ function App() {
           setCurrentUser(userData);
           setCards(cardsData);
         })
-        .catch((err) => console.error(err));
+        .catch(console.error);
   }, [loggedIn]);
 
   // обработчик Escape
@@ -155,7 +155,7 @@ function App() {
               navigate('/', { replace: true });
             }
           })
-          .catch((err) => console.error(err));
+          .catch(console.error);
       }
     }
   }

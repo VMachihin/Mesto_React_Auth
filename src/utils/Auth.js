@@ -34,6 +34,7 @@ export function checkToken(token) {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${token}`,
+      credentials: 'include',
       'Content-Type': 'application/json',
     },
   }).then((res) => checkResponse(res));
