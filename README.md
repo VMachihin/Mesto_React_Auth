@@ -13,4 +13,3 @@
 5. JavaScript.
 6. React
 
-[Для просмотра работы, нажмите]([https://mesto.vitmach.ru)](https://mesto-react-auth-theta.vercel.app/)https://mesto-react-auth-theta.vercel.app/)
