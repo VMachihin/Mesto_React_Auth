@@ -1,4 +1,4 @@
-# [Проект: Mesto](https://mesto-react-auth-theta.vercel.app/)https://mesto-react-auth-theta.vercel.app/)
+# [Проект: Mesto](https://mesto-react-auth-theta.vercel.app/)
 
 ## Описание проекта
 
